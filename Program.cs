@@ -1,11 +1,14 @@
 using Microsoft.EntityFrameworkCore;
 using TodoAPI.Data;
+using TodoAPI.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<TodoDbContext>(options =>
 options.UseSqlServer(builder.Configuration
 .GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<ITodoRepository, TodoRepository>();
 
 // 1️⃣ Add services
 builder.Services.AddControllers();           // Enables controllers
