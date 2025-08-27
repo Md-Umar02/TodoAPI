@@ -163,3 +163,4 @@ C:\Users\hello\TodoAPI\obj\Debug\net9.0\refint\TodoAPI.dll
 C:\Users\hello\TodoAPI\obj\Debug\net9.0\TodoAPI.pdb
 C:\Users\hello\TodoAPI\obj\Debug\net9.0\TodoAPI.genruntimeconfig.cache
 C:\Users\hello\TodoAPI\obj\Debug\net9.0\ref\TodoAPI.dll
+C:\Users\hello\TodoAPI\obj\Debug\net9.0\TodoAPI.sourcelink.json
