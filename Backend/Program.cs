@@ -1,0 +1,44 @@
+using Microsoft.EntityFrameworkCore;
+using TodoAPI.Data;
+using TodoAPI.Repositories;
+
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<TodoDbContext>(options =>
+options.UseSqlServer(builder.Configuration
+.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<ITodoRepository, TodoRepository>();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+    });
+});
+
+// 1️⃣ Add services
+builder.Services.AddControllers();           // Enables controllers
+builder.Services.AddEndpointsApiExplorer(); // Needed for Swagger
+builder.Services.AddSwaggerGen();           // Swagger UI
+
+var app = builder.Build();
+
+// 2️⃣ Middleware pipeline
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+// Optional HTTPS redirection
+// app.UseHttpsRedirection();
+app.UseCors("AllowAll");
+app.UseAuthorization();
+
+// 3️⃣ Map controllers
+app.MapControllers(); // MUST have this to connect controller routes
+
+// 4️⃣ Run the app
+app.Run();
